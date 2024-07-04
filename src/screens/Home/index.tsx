@@ -1,16 +1,11 @@
 import HomeHeader from "@/components/HomeHeader";
 import Navbar from "@/components/Navbar";
+import useTranslation from "@/hooks/useTranslation";
+import {pagesTranslations} from "@/types/props";
 import {Link} from "react-router-dom";
-import {useTranslation} from "react-i18next";
-
 export default function Home() {
-  const {t: trans, i18n} = useTranslation();
+  const {t, generics} = useTranslation(pagesTranslations.unauthDashboard);
 
-  // locale test
-  i18n.changeLanguage("es");
-
-  const generics = (e: string) => trans("generics." + e);
-  const t = (e: string) => trans("pages.unauthDashboard." + e);
   return (
     <>
       <Navbar />
