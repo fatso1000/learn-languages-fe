@@ -1,5 +1,5 @@
-import {Params, redirect} from "react-router-dom";
-import {locales} from "./helpers";
+import { Params, redirect } from "react-router-dom";
+import { locales } from "./helpers";
 
 function localeFromBrowser() {
   const localeParams = navigator && navigator.language.slice(0, 2);
@@ -15,4 +15,4 @@ function validateLocale(params?: Params<string>) {
   return null;
 }
 
-export {localeFromBrowser, validateLocale};
+export { localeFromBrowser, validateLocale };
