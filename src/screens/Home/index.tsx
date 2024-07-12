@@ -1,12 +1,10 @@
 import HomeHeader from "@/components/HomeHeader";
 import Navbar from "@/components/Navbar";
-import { Link } from "react-router-dom";
-import { useTranslation } from "react-i18next";
-
+import useTranslation from "@/hooks/useTranslation";
+import {pagesTranslations} from "@/types/props";
+import {Link} from "react-router-dom";
 export default function Home() {
-  const { t: trans } = useTranslation();
-  const generics = (e: string) => trans("generics." + e);
-  const t = (e: string) => trans("pages.unauthDashboard." + e);
+  const {t, generics} = useTranslation(pagesTranslations.unauthDashboard);
 
   return (
     <>
@@ -86,8 +84,7 @@ export default function Home() {
                 <div className="md:flex-1">
                   <Link
                     className="btn bg-success-content text-success hover:bg-success-content/80 md:btn-wide px-12 normal-case text-xl"
-                    to="/auth/signup"
-                  >
+                    to="/auth/signup">
                     {generics("startToday")}
                   </Link>
                 </div>

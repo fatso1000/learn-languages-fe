@@ -1,5 +1,14 @@
-import { RefObject, TextareaHTMLAttributes } from "react";
-import { ContentElement, ExerciseDifficulty, IExercise, IFlags, ILevel, ILives, IUnit, SelectedLanguageElement } from "./generics";
+import {RefObject, TextareaHTMLAttributes} from "react";
+import {
+  ContentElement,
+  ExerciseDifficulty,
+  IExercise,
+  IFlags,
+  ILevel,
+  ILives,
+  IUnit,
+  SelectedLanguageElement,
+} from "./generics";
 
 export interface ExercisesProps {
   data: IExercise;
@@ -138,4 +147,22 @@ export enum Locales {
   japanese = "jp",
   german = "de",
   french = "fr",
+}
+export enum rootTranslations {
+  pages = "pages.",
+  generics = "generics.",
+}
+export enum pagesTranslations {
+  unauthDashboard = "unauthDashboard.",
+  dashboard = "dashboard.",
+  signUp = "signUp.",
+  signIn = "signIn.",
+  profile = "profile.",
+  reading = "reading.",
+  course = "course.",
+  section = "section.",
+  languages = "languages.",
+  verify = "verify.",
+  verified = "verified.",
+  error = "error.",
 }
