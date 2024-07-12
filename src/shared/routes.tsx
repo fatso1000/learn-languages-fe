@@ -1,6 +1,6 @@
 import Home from "@/screens/Home";
-import {LoaderFunctionArgs} from "react-router-dom";
-import {localeFromBrowser, validateLocale} from "./localeManager";
+import { LoaderFunctionArgs } from "react-router-dom";
+import { localeFromBrowser, validateLocale } from "./localeManager";
 
 export const routes = [
   {
@@ -13,7 +13,7 @@ export const routes = [
   {
     path: ":locale",
     element: <Home />,
-    loader: async ({params}: LoaderFunctionArgs) => {
+    loader: async ({ params }: LoaderFunctionArgs) => {
       return validateLocale(params);
     },
   },
