@@ -1,4 +1,4 @@
-import { IColorsObject } from "src/types";
+import { IColorsObject } from "@/types/generics";
 import { colorsListObject } from "./LevelColors";
 
 function getRandomItemFromArray<T>(array: T[]) {
@@ -110,12 +110,13 @@ function getTimeRemaining(start: Date, end: Date) {
 //     ?.code?.substring(0, 2);
 // }
 
-const locales = ["en", "es", "jp"];
+const locales = ["en", "es", "jp", "it", "de", "fr"];
 
 type localesDetail = {
   short: string;
   long: string;
 };
+
 enum localesKey {
   en = "en",
   es = "es",
@@ -284,6 +285,7 @@ export {
   hasOneDayPassed,
   isSameDay,
   locales,
+  localesKey,
   //   getBrowserLanguage,
   levelAuthRegex,
 };
