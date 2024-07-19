@@ -1,16 +1,11 @@
-import React, { Suspense } from "react";
+import React, {Suspense} from "react";
 import ReactDOM from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import "./index.css";
 import "./i18n";
-import Home from "@/screens/Home/index.tsx";
+import {routes} from "./shared/routes";
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Home />,
-  },
-]);
+const router = createBrowserRouter(routes);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
