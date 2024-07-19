@@ -1,6 +1,5 @@
-import Home from "@/screens/Home";
+import { localeFromBrowser, validateLocale } from "@/shared/localeManager";
 import { LoaderFunctionArgs, RouteObject } from "react-router-dom";
-import { localeFromBrowser, validateLocale } from "./localeManager";
 
 export const routes: RouteObject[] = [
   {
@@ -19,6 +18,5 @@ export const routes: RouteObject[] = [
     loader: async ({ params }: LoaderFunctionArgs) => {
       return validateLocale(params);
     },
-    children: [{ path: "login", element: <Home /> }],
   },
 ];

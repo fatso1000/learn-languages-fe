@@ -1,9 +1,9 @@
-import React, {Suspense} from "react";
+import React, { Suspense } from "react";
 import ReactDOM from "react-dom/client";
-import {createBrowserRouter, RouterProvider} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 import "./i18n";
-import {routes} from "./shared/routes";
+import { routes } from "./routes";
 
 const router = createBrowserRouter(routes);
 

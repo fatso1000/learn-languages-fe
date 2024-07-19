@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import { CSSProperties } from "react";
-import { useTranslation } from "react-i18next";
+import useTranslation from "@/hooks/useTranslation";
 
 export default function HomeHeader({ subtitle }: { subtitle: string }) {
-  const { t } = useTranslation("generics");
+  const { generics } = useTranslation();
 
   return (
     <>
@@ -55,13 +55,13 @@ export default function HomeHeader({ subtitle }: { subtitle: string }) {
               className="btn btn-success flex-1 px-12 normal-case text-base"
               to="/auth/signup"
             >
-              {t("signUp")}
+              {generics("signUp")}
             </Link>
             <Link
               className="btn md:btn-wide flex-1 px-12 normal-case text-base"
               to="/auth/signin"
             >
-              {t("signIn")}
+              {generics("signIn")}
             </Link>
           </div>
         </div>
