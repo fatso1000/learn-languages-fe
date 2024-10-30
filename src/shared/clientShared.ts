@@ -6,7 +6,8 @@ const handleCustomApiRequest = async <T = unknown>(
   request: string,
   method: method,
   body: unknown = undefined,
-  withToken: boolean = false
+  withToken: boolean = false,
+  contentType: "application/json" | "multipart/form-data" = "application/json"
 ) => {
   try {
     let headers: HeadersInit = [];
@@ -17,6 +18,8 @@ const handleCustomApiRequest = async <T = unknown>(
       const token = { value: "" };
       headers = [["Authorization", `${token?.value}`]];
     }
+    headers.push(["accept", "*/*"]);
+    headers.push(["Content-Type", contentType]);
 
     const fetching = await fetch(request, {
       method,
@@ -29,20 +32,24 @@ const handleCustomApiRequest = async <T = unknown>(
 
     return handleStatusCode<T>(statusCode, petition);
   } catch (error: unknown) {
-    return { errors: error, message: "Unknown error", data: undefined };
+    return {
+      errors: error as string[],
+      message: "Unknown error",
+      data: undefined,
+    } as GenericHandleResponse<T>;
   }
 };
 
 const handleStatusCode = async <T>(
   statusCode: HttpStatusCode,
   petition: GenericHandleResponse<T>
-) => {
+): Promise<GenericHandleResponse<T>> => {
   switch (statusCode) {
     case HttpStatusCode.UNAUTHORIZED:
       //   await logoutUser();
-      return { message: undefined, errors: [], data: undefined };
+      return { message: "", errors: [], data: undefined };
     case HttpStatusCode.OK:
-      return { message: undefined, errors: [], data: petition.data as T };
+      return { message: "", errors: [], data: petition.data as T };
 
     default:
       return {

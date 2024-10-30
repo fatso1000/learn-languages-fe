@@ -53,13 +53,13 @@ export default function HomeHeader({ subtitle }: { subtitle: string }) {
           <div className="mt-6 inline-flex items-center w-full gap-2 ">
             <Link
               className="btn btn-success flex-1 px-12 normal-case text-base"
-              to="/auth/signup"
+              to={`auth/signup`}
             >
               {generics("signUp")}
             </Link>
             <Link
               className="btn md:btn-wide flex-1 px-12 normal-case text-base"
-              to="/auth/signin"
+              to={`auth/signin`}
             >
               {generics("signIn")}
             </Link>

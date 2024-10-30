@@ -1,4 +1,4 @@
-import LocalStorage from "@/shared/localStorage";
+import { LocalStorageHandler } from "@/shared/localStorage";
 import {
   ILives,
   IStrikes,
@@ -7,7 +7,7 @@ import {
 } from "@/types/generics";
 
 export default function useUser() {
-  const localStorage = new LocalStorage();
+  const localStorage = new LocalStorageHandler();
 
   const storageObj = {
     current_user: localStorage.getItem("current_user"),

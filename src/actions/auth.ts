@@ -11,35 +11,53 @@ import {
 } from "@/queryFn";
 // import { setCookie, setLoginCookies, setUserCookie } from "shared/apiShared";
 import { handleCustomApiRequest } from "@/shared/clientShared";
-import LocalStorage from "@/shared/localStorage";
-// import { redirect } from "src/shared/navigation";
+import { LocalStorageHandler } from "@/shared/localStorage";
+import { redirect } from "react-router-dom";
 import { SelectedLanguageElement } from "@/types/generics";
+import { FormikHelpers } from "formik";
+import { getFormData } from "@/shared/helpers";
 
 export async function signUpFormValidation(
-  currentState: any,
-  formData: FormData
+  values: {
+    name: string;
+    email: string;
+    password: string;
+    repeat_password: string;
+    language: string[];
+    type: string;
+  },
+  actions: FormikHelpers<{
+    name: string;
+    email: string;
+    password: string;
+    repeat_password: string;
+    language: string[];
+    type: string;
+  }>
 ) {
   try {
-    const name = formData.get("name"),
-      email = formData.get("email"),
-      password = formData.get("password"),
-      repeat_password = formData.get("repeat_password"),
-      language = formData.get("language");
-
-    if (password === repeat_password) {
-      const user = await signupUser({ email, password, name, language });
-      if (user.errors.length > 0) {
-        return { errors: user.errors, success: false };
-      }
-      return { errors: [], success: true };
-    } else {
-      return {
-        errors: [{ message: "Passwords do not match." }],
-        success: false,
+    const { email, name, password, repeat_password, language } = values,
+      k = {
+        name,
+        password,
+        repeat_password,
+        language: language.join(","),
+        email,
       };
+    if (password === repeat_password) {
+      const user = await signupUser(k);
+      if (user.errors.length > 0) {
+        actions.setFieldError("password", user.errors.join(", "));
+        actions.setSubmitting(false);
+      }
+      return redirect("/auth/verify");
+    } else {
+      actions.setFieldError("password", "Passwords do not match.");
+      actions.setSubmitting(false);
     }
   } catch (error) {
-    return { errors: ["Unknown error"], success: false };
+    actions.setFieldError("password", "Unknown error");
+    actions.setSubmitting(false);
   }
 }
 
@@ -113,13 +131,10 @@ export async function addOrRemoveLifesServer(
 }
 
 export async function signInFormValidation(
-  currentState: any,
-  formData: FormData
+  { email, password }: { email: string; password: string },
+  actions: FormikHelpers<{ email: string; password: string }>
 ) {
   try {
-    const email = formData.get("email"),
-      password = formData.get("password");
-
     const user = await signinUser({ email, password });
 
     if (!user.message || !user.errors || user.errors.length === 0) {
@@ -133,18 +148,21 @@ export async function signInFormValidation(
         ),
         livesStringify = JSON.stringify({ lives, last_live_date }),
         strikesStringify = JSON.stringify({ strikes_length, last_strike_date });
-      setLoginCookies(
+      new LocalStorageHandler().loginUser(
         userStringify,
         languageStringify,
         user.data.token,
         livesStringify,
         strikesStringify
       );
-      return { success: true, errors: [] };
+      actions.setSubmitting(false);
+      return;
     }
 
+    actions.setSubmitting(false);
     return { errors: user.errors, success: false };
   } catch (error) {
+    actions.setSubmitting(false);
     return { errors: [{ message: "Unknown error" }], success: false };
   }
 }

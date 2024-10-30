@@ -7,7 +7,6 @@ export const routes: RouteObject[] = [
     loader: async () => {
       return localeFromBrowser();
     },
-
     errorElement: <h1>Error jijuepu</h1>,
   },
   {
@@ -26,6 +25,26 @@ export const routes: RouteObject[] = [
         lazy: async () => {
           const Home = (await import("@/screens/Home")).default;
           return { Component: Home };
+        },
+        loader: async ({ params }: LoaderFunctionArgs) => {
+          return validateLocale(params);
+        },
+      },
+      {
+        path: "/:locale/auth/signin",
+        lazy: async () => {
+          const SignIn = (await import("@/screens/Auth/Signin")).default;
+          return { Component: SignIn };
+        },
+        loader: async ({ params }: LoaderFunctionArgs) => {
+          return validateLocale(params);
+        },
+      },
+      {
+        path: "/:locale/auth/signup",
+        lazy: async () => {
+          const SignUp = (await import("@/screens/Auth/Signup")).default;
+          return { Component: SignUp };
         },
         loader: async ({ params }: LoaderFunctionArgs) => {
           return validateLocale(params);

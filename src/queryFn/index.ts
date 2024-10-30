@@ -2,7 +2,7 @@ import { handleCustomApiRequest } from "@/shared/clientShared";
 import { IExercise, ISection, IUserCourse } from "@/types/generics";
 
 const getUrl =
-  import.meta.env.NODE_ENV === "production"
+  import.meta.env.NODE_ENV !== "production"
     ? "https://learn-languages-zeta.vercel.app"
     : "http://localhost:3000";
 
@@ -98,11 +98,13 @@ const signinUser = async (userData: unknown) => {
   );
 };
 
-const signupUser = async (userData: unknown) => {
+const signupUser = async (userData: Record<string, string>) => {
   return await handleCustomApiRequest(
     getUrl + "/api/auth/signup",
     "POST",
-    userData
+    userData,
+    false,
+    "application/json"
   );
 };
 

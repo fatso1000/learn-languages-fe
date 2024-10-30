@@ -12,6 +12,7 @@
   "dependencies": {
     "canvas-confetti": "^1.9.3",
     "embla-carousel-react": "^8.1.5",
+    "formik": "^2.4.6",
     "i18next": "^23.11.5",
     "i18next-browser-languagedetector": "^8.0.0",
     "i18next-http-backend": "^2.5.2",
@@ -21,6 +22,7 @@
     "react-i18next": "^14.1.2",
     "react-icons": "^5.2.1",
     "react-router-dom": "^6.24.1",
+    "swr": "^2.2.5",
     "use-sound": "^4.0.3"
   },
   "devDependencies": {

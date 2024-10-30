@@ -10,6 +10,21 @@ function getRandomAnimalName() {
   return getRandomItemFromArray<string>(animalsList).toLowerCase();
 }
 
+function getFormData(obj: Record<string, string>): FormData {
+  const formData = new FormData();
+  Object.keys(obj).forEach((key) => {
+    console.log(`Appending: ${key} = ${obj[key]}`); // Debugging log
+    formData.append(key, obj[key]);
+  });
+
+  // Debugging: Print all entries in FormData
+  for (const [key, value] of formData.entries()) {
+    console.log(`FormData entry: ${key} = ${value}`);
+  }
+
+  return formData;
+}
+
 function getRandomColor() {
   return getRandomItemFromArray<string>(Object.keys(colorsListObject));
 }
@@ -286,6 +301,7 @@ export {
   isSameDay,
   locales,
   localesKey,
+  getFormData,
   //   getBrowserLanguage,
   levelAuthRegex,
 };

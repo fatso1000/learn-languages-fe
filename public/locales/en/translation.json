@@ -90,7 +90,7 @@
     "signIn": {
       "title": "Sign In",
       "email": "Email",
-      "password": "password",
+      "password": "Password",
       "forgotPassword": "Forgot password?"
     },
     "dashboard": {
